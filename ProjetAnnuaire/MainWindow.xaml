@@ -19,7 +19,7 @@
 
             <!-- Premier tiers -->
             <Grid Grid.Row="0">
-                <Grid Grid.Row="0" Background="NavajoWhite">
+                <Grid Grid.Row="0" Background="LightSlateGray" Margin="10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
@@ -27,12 +27,44 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBox x:Name="txtSearchByName" Text="Rechercher par nom de salarié" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10"/>
-                    <TextBox x:Name="txtSearchBySite" Text="Rechercher par site" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10"/>
-                    <TextBox x:Name="txtSearchByService" Text="Rechercher par service" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10"/>
-                    <Button Content="Rechercher" Grid.Column="3" Click="Search_Click" HorizontalAlignment="Right" Margin="10"/>
+                    <TextBox x:Name="txtSearchByName" Text="Rechercher par nom de salarié" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5"/>
+                    <TextBox x:Name="txtSearchBySite" Text="Rechercher par site" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5"/>
+                    <TextBox x:Name="txtSearchByService" Text="Rechercher par service" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5"/>
+                    <Button Content="Rechercher" Grid.Column="3" Click="Search_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#007ACC"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="FontSize" Value="14"/>
+                                <Setter Property="Padding" Value="15, 5"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        CornerRadius="5">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#005F9F"/>
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter Property="Background" Value="#004C7F"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
                 </Grid>
             </Grid>
+
 
             <!-- Deuxième tiers -->
             <Grid Grid.Row="1">

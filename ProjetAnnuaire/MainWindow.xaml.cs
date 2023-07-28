@@ -23,6 +23,13 @@ namespace ProjetAnnuaire
         public MainWindow()
         {
             InitializeComponent();
+                
+            SQLConnector sqlConnector = new SQLConnector();
+            sqlConnector.SQLConnect();
+        }
+
+        private void Search_Click(object sender, RoutedEventArgs e )
+        { 
         }
     }
 }
