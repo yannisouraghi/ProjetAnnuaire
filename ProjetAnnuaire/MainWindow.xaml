@@ -7,6 +7,42 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid Background="WhiteSmoke">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <!-- Premier tiers (1/3 de la hauteur totale) -->
+                <RowDefinition Height="3*"/>
+                <!-- Deuxième tiers (2/3 de la hauteur totale) -->
+                <RowDefinition Height="*"/>
+                <!-- Troisième tiers (1/3 de la hauteur totale) -->
+            </Grid.RowDefinitions>
 
+            <!-- Premier tiers -->
+            <Grid Grid.Row="0">
+                <Grid Grid.Row="0" Background="NavajoWhite">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox x:Name="txtSearchByName" Text="Rechercher par nom de salarié" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10"/>
+                    <TextBox x:Name="txtSearchBySite" Text="Rechercher par site" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10"/>
+                    <TextBox x:Name="txtSearchByService" Text="Rechercher par service" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10"/>
+                    <Button Content="Rechercher" Grid.Column="3" Click="Search_Click" HorizontalAlignment="Right" Margin="10"/>
+                </Grid>
+            </Grid>
+
+            <!-- Deuxième tiers -->
+            <Grid Grid.Row="1">
+                <!-- Votre contenu ici -->
+            </Grid>
+
+            <!-- Troisième tiers -->
+            <Grid Grid.Row="2">
+                <!-- Votre contenu ici -->
+            </Grid>
+        </Grid>
     </Grid>
 </Window>
