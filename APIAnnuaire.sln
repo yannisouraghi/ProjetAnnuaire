@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIAnnuaire", "APIAnnuaire\APIAnnuaire.csproj", "{92D715A8-86CC-4C23-98EC-025D519E8EDD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{92D715A8-86CC-4C23-98EC-025D519E8EDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92D715A8-86CC-4C23-98EC-025D519E8EDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92D715A8-86CC-4C23-98EC-025D519E8EDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92D715A8-86CC-4C23-98EC-025D519E8EDD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {84C4D863-F246-47E6-B990-F122C38A98DA}
+	EndGlobalSection
+EndGlobal
