@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjetAnnuaire"
         mc:Ignorable="d"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid Background="WhiteSmoke">
@@ -68,7 +69,23 @@
 
             <!-- Deuxième tiers -->
             <Grid Grid.Row="1">
-                <!-- Votre contenu ici -->
+                <Grid Grid.Row="1">
+                    <DataGrid ItemsSource="{Binding Employees}" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                            <DataGridTextColumn Header="Prénom" Binding="{Binding FirstName}" />
+                            <DataGridTextColumn Header="Nom" Binding="{Binding LastName}" />
+                            <DataGridTextColumn Header="Département" Binding="{Binding Department}" />
+                            <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
+                            <DataGridTextColumn Header="Numéro de téléphone" Binding="{Binding PhoneNumber}" />
+                            <DataGridTextColumn Header="Mobile" Binding="{Binding MobilePhone}" />
+                            <DataGridTextColumn Header="Titre de poste" Binding="{Binding JobTitle}" />
+                            <DataGridTextColumn Header="Description de poste" Binding="{Binding JobDescription}" />
+                            <DataGridTextColumn Header="Service" Binding="{Binding Service}" />
+                            <DataGridTextColumn Header="Site" Binding="{Binding Site}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
             </Grid>
 
             <!-- Troisième tiers -->

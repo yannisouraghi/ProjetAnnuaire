@@ -1,6 +1,9 @@
-﻿using System;
+﻿using APIAnnuaire.Models;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,6 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Newtonsoft.Json;
+
 
 namespace ProjetAnnuaire
 {
@@ -20,16 +25,50 @@ namespace ProjetAnnuaire
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly HttpClient _httpClient;
+
+        public ObservableCollection<Employee> Employees { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
-                
-            SQLConnector sqlConnector = new SQLConnector();
-            sqlConnector.SQLConnect();
+            Employees = new ObservableCollection<Employee>();
+            _httpClient = new HttpClient();
+
+            LoadEmployees();
+            DataContext = this;
         }
 
-        private void Search_Click(object sender, RoutedEventArgs e )
-        { 
+        private async Task<IEnumerable<Employee>> GetAllEmployees()
+        {
+            HttpResponseMessage response = await _httpClient.GetAsync("https://localhost:7053/api/Employee");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var contentStream = await response.Content.ReadAsStreamAsync();
+                var employees = await System.Text.Json.JsonSerializer.DeserializeAsync<IEnumerable<Employee>>(contentStream);
+                return employees;
+            }
+            else
+            {
+                return new List<Employee>();
+            }
+        }
+
+
+        private async void LoadEmployees()
+        {
+            IEnumerable<Employee> employees = await GetAllEmployees();
+            foreach (Employee employee in employees)
+            {
+                Employees.Add(employee);
+            }
+        }
+
+
+        private void Search_Click(object sender, RoutedEventArgs e)
+        {
+            LoadEmployees();
         }
     }
 }
