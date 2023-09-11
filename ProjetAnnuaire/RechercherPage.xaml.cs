@@ -31,6 +31,8 @@ namespace ProjetAnnuaire
             var SearchName = txtSearchByName.Text;
             var SearchService = txtSearchByService.Text;
 
+            MessageBox.Show("Recherche par site : " + SearchSite + "\nRecherche par nom : " + SearchName + "\nRecherche par service : " + SearchService);
+
             //if (SearchSite != "")
             //{
             //    var result = Employees.Where(x => x.Site == SearchSite);

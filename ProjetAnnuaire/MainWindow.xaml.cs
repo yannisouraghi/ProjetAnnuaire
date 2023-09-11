@@ -45,6 +45,7 @@ namespace ProjetAnnuaire
         public MainWindow()
         {
             InitializeComponent();
+            this.Width = 900;
             Employees = new ObservableCollection<Employee>();
             _httpClient = new HttpClient();
             CommandBindings.Add(new CommandBinding(OpenAdminCommand, OpenAdminCommand_Executed, OpenAdminCommand_CanExecute));
