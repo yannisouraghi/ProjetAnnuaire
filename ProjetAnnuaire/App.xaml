@@ -4,6 +4,9 @@
              xmlns:local="clr-namespace:ProjetAnnuaire"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <FontFamily x:Key="FontAwesome">/ProjetAnnuaire;component/Fonts/#FontAwesome</FontFamily>
+        </ResourceDictionary>
     </Application.Resources>
+
 </Application>

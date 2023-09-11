@@ -7,90 +7,57 @@
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="MainWindow" Height="450" Width="800">
+
+
     <Grid>
-        <Grid Background="WhiteSmoke">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <!-- Premier tiers (1/3 de la hauteur totale) -->
-                <RowDefinition Height="3*"/>
-                <!-- Deuxième tiers (2/3 de la hauteur totale) -->
-                <RowDefinition Height="*"/>
-                <!-- Troisième tiers (1/3 de la hauteur totale) -->
-            </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
 
-            <!-- Premier tiers -->
-            <Grid Grid.Row="0">
-                <Grid Grid.Row="0" Background="LightSlateGray" Margin="10">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
+        <!-- Menu latéral (ruban de menu) -->
+        <StackPanel Grid.Column="0" Background="DarkSlateGray" Width="200">
+            <!-- Mode Visiteur -->
+            <Expander IsExpanded="True">
+                <Expander.Header>
+                    <TextBlock Text="Mode Visiteur" Foreground="White" FontWeight="Bold" Margin="10" />
+                </Expander.Header>
+                <Button Content="Rechercher" Margin="14" Foreground="Black" FontWeight="Bold" Click="RechercherButton_Click" />
+            </Expander>
 
-                    <TextBox x:Name="txtSearchByName" Text="Rechercher par nom de salarié" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5"/>
-                    <TextBox x:Name="txtSearchBySite" Text="Rechercher par site" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5"/>
-                    <TextBox x:Name="txtSearchByService" Text="Rechercher par service" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5"/>
-                    <Button Content="Rechercher" Grid.Column="3" Click="Search_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="#007ACC"/>
-                                <Setter Property="Foreground" Value="White"/>
-                                <Setter Property="FontWeight" Value="Bold"/>
-                                <Setter Property="FontSize" Value="14"/>
-                                <Setter Property="Padding" Value="15, 5"/>
-                                <Setter Property="BorderThickness" Value="0"/>
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="Button">
-                                            <Border Background="{TemplateBinding Background}"
-                                        BorderBrush="{TemplateBinding BorderBrush}"
-                                        BorderThickness="{TemplateBinding BorderThickness}"
-                                        CornerRadius="5">
-                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#005F9F"/>
-                                    </Trigger>
-                                    <Trigger Property="IsPressed" Value="True">
-                                        <Setter Property="Background" Value="#004C7F"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                    </Button>
-                </Grid>
-            </Grid>
+            <!-- Mode Admin -->
+            <Expander x:Name="adminExpander" Visibility="{Binding AdminExpanderVisibility}">
+                <Expander.Header>
+                    <TextBlock Text="Mode Admin" Foreground="White" FontWeight="Bold" Margin="10" />
+                </Expander.Header>
+                <StackPanel>
+                    <Button Content="Rechercher" Margin="14" Foreground="Black" FontWeight="Bold"/>
+                    <Button Content="Ajouter" Margin="14" Foreground="Black" FontWeight="Bold"/>
+                    <Button Content="Modifier" Margin="14" Foreground="Black" FontWeight="Bold"/>
+                    <Button Content="Supprimer" Margin="14" Foreground="Black" FontWeight="Bold"/>
+                </StackPanel>
+            </Expander>
+
+            <!-- Bouton de Déconnexion (en bas) -->
+            <Button Content="Déconnexion" Visibility="{Binding AdminExpanderVisibility}" Margin="14" Foreground="Black" FontWeight="Bold" Click="Deconnexion_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="IndianRed"/>
+                        <!-- Couleur de fond rouge pour le bouton de déconnexion -->
+                    </Style>
+                </Button.Style>
+            </Button>
+        </StackPanel>
 
 
-            <!-- Deuxième tiers -->
+
+
+        <!-- Contenu principal -->
+        <Grid Grid.Column="1">
             <Grid Grid.Row="1">
                 <Grid Grid.Row="1">
-                    <DataGrid ItemsSource="{Binding Employees}" AutoGenerateColumns="False">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
-                            <DataGridTextColumn Header="Prénom" Binding="{Binding FirstName}" />
-                            <DataGridTextColumn Header="Nom" Binding="{Binding LastName}" />
-                            <DataGridTextColumn Header="Département" Binding="{Binding Department}" />
-                            <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
-                            <DataGridTextColumn Header="Numéro de téléphone" Binding="{Binding PhoneNumber}" />
-                            <DataGridTextColumn Header="Mobile" Binding="{Binding MobilePhone}" />
-                            <DataGridTextColumn Header="Titre de poste" Binding="{Binding JobTitle}" />
-                            <DataGridTextColumn Header="Description de poste" Binding="{Binding JobDescription}" />
-                            <DataGridTextColumn Header="Service" Binding="{Binding Service}" />
-                            <DataGridTextColumn Header="Site" Binding="{Binding Site}" />
-                        </DataGrid.Columns>
-                    </DataGrid>
+                    <Frame x:Name="contentFrame" NavigationUIVisibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 </Grid>
-            </Grid>
-
-            <!-- Troisième tiers -->
-            <Grid Grid.Row="2">
-                <!-- Votre contenu ici -->
             </Grid>
         </Grid>
     </Grid>
