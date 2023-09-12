@@ -17,8 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using System.Text.Json.Serialization;
-using FontAwesome.WPF;
-using FontAwesome;
+
 
 namespace ProjetAnnuaire
 {
@@ -46,15 +45,16 @@ namespace ProjetAnnuaire
         {
             InitializeComponent();
             this.Width = 900;
+            this.Height = 475;
             Employees = new ObservableCollection<Employee>();
             _httpClient = new HttpClient();
             CommandBindings.Add(new CommandBinding(OpenAdminCommand, OpenAdminCommand_Executed, OpenAdminCommand_CanExecute));
             InputBindings.Add(new KeyBinding(OpenAdminCommand, new KeyGesture(Key.A, ModifierKeys.Control)));
-
+            
             //LoadEmployees();
             DataContext = this;
         }
-
+       
         private void Deconnexion_Click(object sender, RoutedEventArgs e)
         {
             AdminExpanderVisibility = Visibility.Collapsed;
@@ -63,6 +63,18 @@ namespace ProjetAnnuaire
         private void RechercherButton_Click(object sender, RoutedEventArgs e)
         {
             contentFrame.Navigate(new Uri("RechercherPage.xaml", UriKind.Relative));
+        }
+        private void AjouterButton_Click(object sender, RoutedEventArgs e)
+        {
+            contentFrame.Navigate(new Uri("AjouterPage.xaml", UriKind.Relative));
+        }
+        private void ModifierButton_Click(object sender, RoutedEventArgs e)
+        {
+            contentFrame.Navigate(new Uri("ModifierPage.xaml", UriKind.Relative));
+        }
+        private void SupprimerButton_Click(object sender, RoutedEventArgs e)
+        {
+            contentFrame.Navigate(new Uri("SupprimerPage.xaml", UriKind.Relative));
         }
 
 
@@ -110,6 +122,11 @@ namespace ProjetAnnuaire
             {
                 MessageBox.Show("Mot de passe incorrect");
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
 

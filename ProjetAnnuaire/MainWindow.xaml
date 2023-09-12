@@ -11,16 +11,20 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" MaxWidth="150" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
         <!-- Menu latéral (ruban de menu) -->
-        <StackPanel Grid.Column="0" Background="DarkSlateGray" Width="200">
+        <StackPanel Grid.Column="0" Background="DarkSlateGray" Width="150">
             <!-- Mode Visiteur -->
             <Expander IsExpanded="True">
                 <Expander.Header>
-                    <TextBlock Text="Mode Visiteur" Foreground="White" FontWeight="Bold" Margin="10" />
+                    <TextBlock FontWeight="Bold" Margin="10">
+                        <Run Text="Mode Visiteur " Foreground="White" />
+                        <TextBlock FontFamily="{StaticResource FontAwesome}" Text="&#xf007;" Foreground="White" />
+                    </TextBlock>
+
                 </Expander.Header>
                 <Button Content="Rechercher" Margin="14" Foreground="Black" FontWeight="Bold" Click="RechercherButton_Click" />
             </Expander>
@@ -28,25 +32,46 @@
             <!-- Mode Admin -->
             <Expander x:Name="adminExpander" Visibility="{Binding AdminExpanderVisibility}">
                 <Expander.Header>
-                    <TextBlock Text="Mode Admin" Foreground="White" FontWeight="Bold" Margin="10" />
+                    <TextBlock FontWeight="Bold" Margin="10">
+                        <Run Text="Mode Admin " Foreground="White" />
+                        <TextBlock FontFamily="{StaticResource FontAwesome}" Text="&#xf2bd;" Foreground="White" />
+                    </TextBlock>
+
+
                 </Expander.Header>
                 <StackPanel>
-                    <Button Content="Rechercher" Margin="14" Foreground="Black" FontWeight="Bold"/>
-                    <Button Content="Ajouter" Margin="14" Foreground="Black" FontWeight="Bold"/>
-                    <Button Content="Modifier" Margin="14" Foreground="Black" FontWeight="Bold"/>
-                    <Button Content="Supprimer" Margin="14" Foreground="Black" FontWeight="Bold"/>
+                    <Button Content="Rechercher" Margin="14" Foreground="Black" FontWeight="Bold" Click="RechercherButton_Click"/>
+                    <Button Content="Ajouter" Margin="14" Foreground="Black" FontWeight="Bold" Click="AjouterButton_Click"/>
+                    <Button Content="Modifier" Margin="14" Foreground="Black" FontWeight="Bold" Click="ModifierButton_Click"/>
+                    <Button Content="Supprimer" Margin="14" Foreground="Black" FontWeight="Bold" Click="SupprimerButton_Click"/>
                 </StackPanel>
             </Expander>
 
             <!-- Bouton de Déconnexion (en bas) -->
-            <Button Content="Déconnexion" Visibility="{Binding AdminExpanderVisibility}" Margin="14" Foreground="Black" FontWeight="Bold" Click="Deconnexion_Click">
+            <Button Visibility="{Binding AdminExpanderVisibility}" Margin="14" FontWeight="Bold" Click="Deconnexion_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontFamily="{StaticResource FontAwesome}" Text="&#xf08b;" Foreground="White" VerticalAlignment="Center" Margin="0,0,5,0" />
+                    <TextBlock Text="Déconnexion" Foreground="White" VerticalAlignment="Center" />
+                </StackPanel>
                 <Button.Style>
                     <Style TargetType="Button">
-                        <Setter Property="Background" Value="IndianRed"/>
-                        <!-- Couleur de fond rouge pour le bouton de déconnexion -->
+                        <Setter Property="Background" Value="DarkSlateGray" />
+                        <Setter Property="Foreground" Value="White" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
                     </Style>
                 </Button.Style>
             </Button>
+
+
+
         </StackPanel>
 
 

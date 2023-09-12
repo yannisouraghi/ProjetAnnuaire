@@ -1,7 +1,7 @@
-﻿<Page x:Class="ProjetAnnuaire.RechercherPage"
+﻿<Page x:Class="ProjetAnnuaire.SupprimerPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      Title="Rechercher">
+      Title="SupprimerPage">
     <Page.Resources>
         <!-- Les styles que vous avez fournis -->
         <Style x:Key="LabelStyle" TargetType="TextBlock">
@@ -74,10 +74,6 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -90,36 +86,22 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <TextBlock Text="Rechercher un employé" FontSize="18" FontWeight="Bold" Margin="10" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="7" HorizontalAlignment="Center"/>
+        <TextBlock Text="Supprimer un employé" FontSize="18" FontWeight="Bold" Margin="10" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="7" HorizontalAlignment="Center"/>
 
-        <TextBlock FontWeight="Bold" Margin="10" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-            <Run Text="Rechercher par Site" />
-            <TextBlock FontFamily="{StaticResource FontAwesome}" Text="&#xf1ad;" />
-        </TextBlock>
-        <TextBox x:Name="txtSearchBySite" Margin="10" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" />
-        <TextBlock Text="Entrez le site de recherche" Foreground="Gray" Margin="10" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="3" />
+        <TextBlock Text="Nom:" FontWeight="Bold" Margin="10" Grid.Row="1" Grid.Column="0" />
+        <TextBox x:Name="txtDeleteEmployeeLastName" Style="{StaticResource TextBoxStyle}" Margin="10" Grid.Row="1" Grid.Column="1" />
 
-        <TextBlock FontWeight="Bold" Margin="10" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
-            <Run Text="Rechercher par Salarié" />
-            <TextBlock FontFamily="{StaticResource FontAwesome}" Text="&#xf007;" />
-        </TextBlock>
-        <TextBox x:Name="txtSearchByName" Margin="10" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" />
-        <TextBlock Text="Entrez le nom de salarié" Foreground="Gray" Margin="10" Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="3" />
+        <TextBlock Text="Prénom:" FontWeight="Bold" Margin="10" Grid.Row="1" Grid.Column="2" />
+        <TextBox x:Name="txtDeleteEmployeeFirstName" Style="{StaticResource TextBoxStyle}" Margin="10" Grid.Row="1" Grid.Column="3" />
 
-        <TextBlock FontWeight="Bold" Margin="10" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2">
-            <Run Text="Rechercher par Service" />
-            <TextBlock FontFamily="{StaticResource FontAwesome}" Text="&#xf03a;" />
-        </TextBlock>
-        <TextBox x:Name="txtSearchByService" Margin="10" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" />
-        <TextBlock Text="Entrez le service de recherche" Foreground="Gray" Margin="10" Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="3" />
-
-        <Button Click="Search_Click" Style="{StaticResource ButtonStyle}" Margin="10" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="7">
+        <Button Click="SearchToDelete_Click" Style="{StaticResource ButtonStyle}" Margin="10" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2">
             <Button.Content>
                 <TextBlock FontFamily="{StaticResource FontAwesome}">&#xf002;</TextBlock>
             </Button.Content>
         </Button>
 
-        <DataGrid Name="EmployeesData" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="7" AutoGenerateColumns="False">
+
+        <DataGrid Name="EmployeeDataGrid" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="7" AutoGenerateColumns="False" SelectionMode="Extended" Style="{StaticResource DataGridStyle}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Prénom" Binding="{Binding FirstName}" />
                 <DataGridTextColumn Header="Nom" Binding="{Binding LastName}" />
@@ -133,5 +115,11 @@
                 <DataGridTextColumn Header="Site" Binding="{Binding Site}" />
             </DataGrid.Columns>
         </DataGrid>
+
+        <Button Name="AppliquerModificationsButton" Click="DeleteSelected_Click" Style="{StaticResource ButtonStyle}" Margin="10" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="7">
+            <Button.Content>
+                <TextBlock FontFamily="{StaticResource FontAwesome}">&#xf1f8;</TextBlock>
+            </Button.Content>
+        </Button>
     </Grid>
 </Page>

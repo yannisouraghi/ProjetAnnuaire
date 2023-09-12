@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Newtonsoft.Json;
 
 namespace ProjetAnnuaire
 {
@@ -25,42 +27,49 @@ namespace ProjetAnnuaire
         {
             InitializeComponent();
         }
-        private void Search_Click(object sender, RoutedEventArgs e)
+        private async void Search_Click(object sender, RoutedEventArgs e)
         {
-            var SearchSite = txtSearchBySite.Text;
-            var SearchName = txtSearchByName.Text;
-            var SearchService = txtSearchByService.Text;
+            try
+            {
+                var httpClient = new HttpClient();
+                var baseUri = "https://localhost:7053"; 
+                var uri = $"{baseUri}/api/Employee/Search";
 
-            MessageBox.Show("Recherche par site : " + SearchSite + "\nRecherche par nom : " + SearchName + "\nRecherche par service : " + SearchService);
+                // Construisez l'URI avec les paramètres de recherche
+                var queryParams = new List<string>();
+                if (!string.IsNullOrEmpty(txtSearchBySite.Text))
+                    queryParams.Add($"site={Uri.EscapeDataString(txtSearchBySite.Text)}");
+                if (!string.IsNullOrEmpty(txtSearchByName.Text))
+                    queryParams.Add($"name={Uri.EscapeDataString(txtSearchByName.Text)}");
+                if (!string.IsNullOrEmpty(txtSearchByService.Text))
+                    queryParams.Add($"service={Uri.EscapeDataString(txtSearchByService.Text)}");
 
-            //if (SearchSite != "")
-            //{
-            //    var result = Employees.Where(x => x.Site == SearchSite);
-            //    Employees.Clear();
-            //    foreach (Employee employee in result)
-            //    {
-            //        Employees.Add(employee);
-            //    }
-            //}
-            //if (SearchName != "")
-            //{
-            //    var result = Employees.Where(x => x.LastName == SearchName);
-            //    Employees.Clear();
-            //    foreach (Employee employee in result)
-            //    {
-            //        Employees.Add(employee);
-            //    }
-            //}
-            //if (SearchService != "")
-            //{
-            //    var result = Employees.Where(x => x.Service == SearchService);
-            //    Employees.Clear();
-            //    foreach (Employee employee in result)
-            //    {
-            //        Employees.Add(employee);
-            //    }
-            //}
+                if (queryParams.Any())
+                    uri += "?" + string.Join("&", queryParams);
 
+                var response = await httpClient.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    // Traitez la réponse JSON ici
+                    var jsonResult = await response.Content.ReadAsStringAsync();
+                    var employees = JsonConvert.DeserializeObject<List<Employee>>(jsonResult);
+
+                    // Lier les résultats au DataGrid
+                    EmployeesData.ItemsSource = employees;
+                }
+                else
+                {
+                    MessageBox.Show($"Erreur lors de la requête API : {response.StatusCode} - {response.ReasonPhrase}");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur : " + ex.Message);
+            }
         }
+
+        
+
     }
 }
