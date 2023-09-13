@@ -28,7 +28,7 @@ namespace ProjetAnnuaire
     {
         private readonly HttpClient _httpClient;
 
-        public ObservableCollection<Employee> Employees { get; set; }
+        public ObservableCollection<Employees> Employees { get; set; }
 
         public Visibility AdminExpanderVisibility
         {
@@ -46,7 +46,7 @@ namespace ProjetAnnuaire
             InitializeComponent();
             this.Width = 900;
             this.Height = 475;
-            Employees = new ObservableCollection<Employee>();
+            Employees = new ObservableCollection<Employees>();
             _httpClient = new HttpClient();
             CommandBindings.Add(new CommandBinding(OpenAdminCommand, OpenAdminCommand_Executed, OpenAdminCommand_CanExecute));
             InputBindings.Add(new KeyBinding(OpenAdminCommand, new KeyGesture(Key.A, ModifierKeys.Control)));

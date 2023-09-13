@@ -110,7 +110,9 @@
             <Run Text="Rechercher par Service" />
             <TextBlock FontFamily="{StaticResource FontAwesome}" Text="&#xf03a;" />
         </TextBlock>
-        <TextBox x:Name="txtSearchByService" Margin="10" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" />
+        <ComboBox Name="Services" Grid.Column="2" Margin="10" Grid.Row="3" Grid.ColumnSpan="2" DisplayMemberPath="Service" />
+
+
         <TextBlock Text="Entrez le service de recherche" Foreground="Gray" Margin="10" Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="3" />
 
         <Button Click="Search_Click" Style="{StaticResource ButtonStyle}" Margin="10" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="7">
@@ -129,8 +131,8 @@
                 <DataGridTextColumn Header="Mobile" Binding="{Binding MobilePhone}" />
                 <DataGridTextColumn Header="Titre de poste" Binding="{Binding JobTitle}" />
                 <DataGridTextColumn Header="Description de poste" Binding="{Binding JobDescription}" />
-                <DataGridTextColumn Header="Service" Binding="{Binding Service}" />
-                <DataGridTextColumn Header="Site" Binding="{Binding Site}" />
+                <DataGridTextColumn Header="Service" Binding="{Binding Services}" />
+                <DataGridTextColumn Header="Site" Binding="{Binding City}" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
