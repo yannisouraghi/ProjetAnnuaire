@@ -1,11 +1,12 @@
 ﻿using APIAnnuaire.Models;
+using Newtonsoft.Json;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProjetAnnuaire
 {
-    public class EmployeesViewModel
+    public class Employees
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -20,13 +21,12 @@ namespace ProjetAnnuaire
         public string? JobDescription { get; set; }
 
         // Clé étrangère pour Site
-        public int? SiteId { get; set; }
-        public Sites? Sites { get; set; }
+        //public int? SiteId { get; set; }
+        //public Sites? Sites { get; set; }
 
-        // Utilisez cette propriété pour stocker le nom du service
-        public string? Services { get; set; }
+        [JsonProperty("services")]
+        public string Service { get; set; }
 
-        // Utilisez cette propriété pour stocker le nom du site
         public string? City { get; set; }
     }
 }

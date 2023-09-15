@@ -7,10 +7,14 @@ using System.Threading.Tasks;
 
 namespace ProjetAnnuaire
 {
-    public class ServicesViewModel
+    public class Sites
     {
         [Key]
-        public int ServiceId { get; set; }
+        public int SiteId { get; set; }
+        public string? City { get; set; }
+        public string? Address { get; set; }
         public string? Service { get; set; }
+        public string? ZipCode { get; set; }
+        public string? Country { get; set; }
     }
 }

@@ -28,7 +28,7 @@ namespace ProjetAnnuaire
     {
         private readonly HttpClient _httpClient;
 
-        public ObservableCollection<Employees> Employees { get; set; }
+        public ObservableCollection<APIAnnuaire.Models.Employees> Employees { get; set; }
 
         public Visibility AdminExpanderVisibility
         {
@@ -44,9 +44,10 @@ namespace ProjetAnnuaire
         public MainWindow()
         {
             InitializeComponent();
-            this.Width = 900;
-            this.Height = 475;
-            Employees = new ObservableCollection<Employees>();
+            contentFrame.Source = new Uri("RechercherPage.xaml", UriKind.Relative);
+            this.Width = 1000;
+            this.Height = 900;
+            Employees = new ObservableCollection<APIAnnuaire.Models.Employees>();
             _httpClient = new HttpClient();
             CommandBindings.Add(new CommandBinding(OpenAdminCommand, OpenAdminCommand_Executed, OpenAdminCommand_CanExecute));
             InputBindings.Add(new KeyBinding(OpenAdminCommand, new KeyGesture(Key.A, ModifierKeys.Control)));
@@ -54,7 +55,34 @@ namespace ProjetAnnuaire
             //LoadEmployees();
             DataContext = this;
         }
-       
+
+        public void NavigateToFicheEmployee(FicheEmployeeViewModel viewModel)
+        {
+            contentFrame.Navigate(new FicheEmployee(viewModel));
+        }
+
+        public void NavigateToRechercherPage()
+        {
+            contentFrame.Navigate(new RechercherPage());
+        }
+
+        public void NavigateToAjouterPage()
+        {
+            contentFrame.Navigate(new AjouterPage());
+        }
+
+        public void NavigateToSupprimerPage()
+        {
+            contentFrame.Navigate(new SupprimerPage());
+        }
+
+        public void NavigateToModifierPage()
+        {
+            contentFrame.Navigate(new ModifierPage());
+        }
+
+
+
         private void Deconnexion_Click(object sender, RoutedEventArgs e)
         {
             AdminExpanderVisibility = Visibility.Collapsed;
@@ -62,19 +90,19 @@ namespace ProjetAnnuaire
 
         private void RechercherButton_Click(object sender, RoutedEventArgs e)
         {
-            contentFrame.Navigate(new Uri("RechercherPage.xaml", UriKind.Relative));
+            NavigateToRechercherPage();
         }
         private void AjouterButton_Click(object sender, RoutedEventArgs e)
         {
-            contentFrame.Navigate(new Uri("AjouterPage.xaml", UriKind.Relative));
+            NavigateToAjouterPage();
         }
         private void ModifierButton_Click(object sender, RoutedEventArgs e)
         {
-            contentFrame.Navigate(new Uri("ModifierPage.xaml", UriKind.Relative));
+            NavigateToModifierPage();
         }
         private void SupprimerButton_Click(object sender, RoutedEventArgs e)
         {
-            contentFrame.Navigate(new Uri("SupprimerPage.xaml", UriKind.Relative));
+            NavigateToSupprimerPage();
         }
 
 
